@@ -1,18 +1,25 @@
 import { useCallback, useState } from 'react';
+
 import {
   Box, Paper, Typography, Grid, Chip, LinearProgress,
   IconButton, Tooltip, Button, Alert, Skeleton,
 } from '@mui/material';
-import {
-  Delete as DeleteIcon,
-  Description as PdfIcon,
-  Image as ImageIcon,
-  CheckCircle as ReadyIcon,
-  HourglassEmpty as PendingIcon,
-  Error as ErrorIcon,
-  CloudUpload as UploadIcon,
-  Refresh as RefreshIcon,
-} from '@mui/icons-material';
+import Description from '@mui/icons-material/Description';
+const FileIcon = Description;
+import Error from '@mui/icons-material/Error';
+const ErrorIcon = Error;
+import CloudUpload from '@mui/icons-material/CloudUpload';
+const UploadIcon = CloudUpload;
+import Refresh from '@mui/icons-material/Refresh';
+const RefreshIcon = Refresh;
+import CheckCircle from '@mui/icons-material/CheckCircle';
+const ReadyIcon = CheckCircle;
+import Schedule from '@mui/icons-material/Schedule';
+const PendingIcon = Schedule;
+import PictureAsPdf from '@mui/icons-material/PictureAsPdf';
+const PdfIcon = PictureAsPdf;
+import Image from '@mui/icons-material/Image';
+const ImageIcon = Image;
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { useDropzone } from 'react-dropzone';

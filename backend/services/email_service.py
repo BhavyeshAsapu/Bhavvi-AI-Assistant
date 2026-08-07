@@ -30,10 +30,20 @@ async def create_verification_token(user_id: str, email: str) -> str:
     token = secrets.token_urlsafe(48)
     expires_at = datetime.now(timezone.utc) + timedelta(hours=TOKEN_TTL_HOURS)
 
+    logger.debug(
+        "token_generated",
+        user_id=user_id,
+        email=email,
+        token_prefix=token[:12],
+        expires_at=expires_at.isoformat(),
+    )
+
     db = get_database()
     # Clean up any existing tokens for this user before creating a new one
-    await db["verification_tokens"].delete_many({"user_id": user_id})
-    await db["verification_tokens"].insert_one(
+    del_result = await db["verification_tokens"].delete_many({"user_id": user_id})
+    logger.debug("old_tokens_deleted", user_id=user_id, deleted_count=del_result.deleted_count)
+
+    insert_result = await db["verification_tokens"].insert_one(
         {
             "user_id": user_id,
             "email": email,
@@ -41,6 +51,13 @@ async def create_verification_token(user_id: str, email: str) -> str:
             "expires_at": expires_at,
             "created_at": datetime.now(timezone.utc),
         }
+    )
+    logger.info(
+        "token_persisted",
+        user_id=user_id,
+        email=email,
+        inserted_id=str(insert_result.inserted_id),
+        token_prefix=token[:12],
     )
     return token
 
@@ -52,13 +69,16 @@ async def verify_token(token: str) -> dict:
         {"ok": True, "user_id": "..."} on success
         {"ok": False, "code": "TOKEN_EXPIRED" | "TOKEN_ALREADY_USED" | "INVALID_TOKEN"}
     """
+    logger.debug("verify_token_lookup", token_prefix=token[:12] if token else "EMPTY")
+
     db = get_database()
     doc = await db["verification_tokens"].find_one({"token": token})
 
     if not doc:
-        # Check if the user's email is already verified (token consumed = already used)
-        # We can't determine this without the user_id, so return INVALID_TOKEN
+        logger.warning("verify_token_not_found", token_prefix=token[:12] if token else "EMPTY")
         return {"ok": False, "code": "INVALID_TOKEN"}
+
+    logger.debug("verify_token_found", user_id=doc["user_id"], email=doc.get("email"))
 
     # Make expires_at timezone-aware before comparing
     expires_at = doc["expires_at"]
@@ -67,10 +87,12 @@ async def verify_token(token: str) -> dict:
 
     if expires_at < datetime.now(timezone.utc):
         await db["verification_tokens"].delete_one({"_id": doc["_id"]})
+        logger.warning("verify_token_expired", user_id=doc["user_id"], expired_at=expires_at.isoformat())
         return {"ok": False, "code": "TOKEN_EXPIRED"}
 
     # Token is valid — consume it (one-time use)
     await db["verification_tokens"].delete_one({"_id": doc["_id"]})
+    logger.info("verify_token_success", user_id=doc["user_id"])
     return {"ok": True, "user_id": doc["user_id"]}
 
 

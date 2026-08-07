@@ -1,14 +1,25 @@
 import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
+
 import {
   Box, Button, TextField, Typography, Paper,
   InputAdornment, IconButton, Alert, Link, CircularProgress, Collapse, Divider,
 } from '@mui/material';
-import {
-  Visibility, VisibilityOff, AutoAwesome as AIIcon,
-  Email as EmailIcon, Lock, MarkEmailRead as EmailSentIcon,
-  ErrorOutline, MailOutline, ArrowBack,
-} from '@mui/icons-material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import Email from '@mui/icons-material/Email';
+const EmailIcon = Email;
+import Lock from '@mui/icons-material/Lock';
+import MarkEmailRead from '@mui/icons-material/MarkEmailRead';
+const EmailSentIcon = MarkEmailRead;
+import ErrorOutlined from '@mui/icons-material/ErrorOutlined';
+const ErrorOutline = ErrorOutlined;
+import MailOutlined from '@mui/icons-material/MailOutlined';
+const MailOutline = MailOutlined;
+import ArrowBack from '@mui/icons-material/ArrowBack';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

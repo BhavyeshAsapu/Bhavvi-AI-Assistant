@@ -1,20 +1,29 @@
 import { useNavigate } from 'react-router-dom';
+
 import {
   Box, Grid, Paper, Typography, Button, Chip,
   LinearProgress, Skeleton, Avatar, IconButton,
 } from '@mui/material';
-import {
-  Chat as ChatIcon,
-  Description as DocIcon,
-  AutoAwesome as AIIcon,
-  TrendingUp as TrendIcon,
-  ArrowForward as ArrowIcon,
-  Psychology as BrainIcon,
-  Visibility as VisionIcon,
-  Search as RAGIcon,
-  Memory as MemoryIcon,
-  Add as AddIcon,
-} from '@mui/icons-material';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import TrendingUp from '@mui/icons-material/TrendingUp';
+const TrendIcon = TrendingUp;
+import ArrowForward from '@mui/icons-material/ArrowForward';
+const ArrowIcon = ArrowForward;
+import Psychology from '@mui/icons-material/Psychology';
+const BrainIcon = Psychology;
+import Visibility from '@mui/icons-material/Visibility';
+const VisionIcon = Visibility;
+import Search from '@mui/icons-material/Search';
+const RAGIcon = Search;
+import Memory from '@mui/icons-material/Memory';
+const MemoryIcon = Memory;
+import Add from '@mui/icons-material/Add';
+const AddIcon = Add;
+import Chat from '@mui/icons-material/Chat';
+const ChatIcon = Chat;
+import Description from '@mui/icons-material/Description';
+const DocIcon = Description;
 import { motion } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

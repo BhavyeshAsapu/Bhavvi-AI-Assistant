@@ -1,22 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import {
   Box, List, ListItem, ListItemButton, ListItemIcon,
   ListItemText, Typography, Divider, IconButton, Tooltip,
   Skeleton, Avatar, Chip,
 } from '@mui/material';
-import {
-  Dashboard as DashboardIcon,
-  Chat as ChatIcon,
-  Description as DocumentsIcon,
-  Settings as SettingsIcon,
-  Add as AddIcon,
-  ChevronLeft as CollapseIcon,
-  AutoAwesome as AIIcon,
-  CameraAlt as VisionIcon,
-  Summarize as SummarizeIcon,
-  Logout as LogoutIcon,
-} from '@mui/icons-material';
+import Dashboard from '@mui/icons-material/Dashboard';
+const DashboardIcon = Dashboard;
+import Chat from '@mui/icons-material/Chat';
+
+const ChatIcon = Chat;
+import Description from '@mui/icons-material/Description';
+const DocumentsIcon = Description;
+import Settings from '@mui/icons-material/Settings';
+const SettingsIcon = Settings;
+import Add from '@mui/icons-material/Add';
+const AddIcon = Add;
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
+const CollapseIcon = ChevronLeft;
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import CameraAlt from '@mui/icons-material/CameraAlt';
+const VisionIcon = CameraAlt;
+import Summarize from '@mui/icons-material/Summarize';
+const SummarizeIcon = Summarize;
+import Logout from '@mui/icons-material/Logout';
+const LogoutIcon = Logout;
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

@@ -1,17 +1,24 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams, Link as RouterLink } from 'react-router-dom';
+
 import {
   Box, Paper, Typography, CircularProgress, Button, Divider,
 } from '@mui/material';
-import {
-  CheckCircle as SuccessIcon,
-  Error as ErrorIcon,
-  WarningAmber as WarningIcon,
-  CheckCircleOutline as AlreadyDoneIcon,
-  AutoAwesome as AIIcon,
-  MarkEmailRead as ResendIcon,
-  ArrowBack,
-} from '@mui/icons-material';
+import CheckCircle from '@mui/icons-material/CheckCircle';
+const SuccessIcon = CheckCircle;
+import Error from '@mui/icons-material/Error';
+const ErrorIcon = Error;
+import WarningAmber from '@mui/icons-material/WarningAmber';
+const WarningIcon = WarningAmber;
+import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined';
+const AlreadyDoneIcon = CheckCircleOutlined;
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import MarkEmailRead from '@mui/icons-material/MarkEmailRead';
+const ResendIcon = MarkEmailRead;
+import ArrowBack from '@mui/icons-material/ArrowBack';
+
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { authApi } from '../services/api';
@@ -80,40 +87,38 @@ export default function VerifyEmailPage() {
   const [uiState, setUiState] = useState('loading');
   const [userEmail, setUserEmail] = useState('');
   const [resendState, setResendState] = useState('idle'); // idle | sending | sent
+  const hasRun = useRef(false); // prevent double-fire in StrictMode
 
   const token = searchParams.get('token');
 
-  const doVerify = useCallback(async () => {
+  useEffect(() => {
+    // Guard: only run once, and only when token is available
+    if (hasRun.current) return;
     if (!token) {
       setUiState('NO_TOKEN');
       return;
     }
+    hasRun.current = true;
 
-    try {
-      const { data } = await authApi.verifyEmail(token);
-      // Structured response: { code: 'SUCCESS' | 'TOKEN_ALREADY_USED', message, user_id }
-      const code = data.code || 'SUCCESS';
-      setUiState(code);
-
-      if (code === 'SUCCESS') {
-        // Auto-redirect to login after 3 s
-        setTimeout(() => navigate('/login'), 3000);
-      }
-    } catch (err) {
-      const code = err.response?.data?.code;
-      if (code === 'TOKEN_EXPIRED') {
-        setUiState('TOKEN_EXPIRED');
-      } else if (code === 'TOKEN_ALREADY_USED') {
-        setUiState('TOKEN_ALREADY_USED');
-      } else {
-        setUiState('INVALID_TOKEN');
-      }
-    }
+    authApi.verifyEmail(token)
+      .then(({ data }) => {
+        const code = data.code || 'SUCCESS';
+        setUiState(code);
+        if (code === 'SUCCESS') {
+          setTimeout(() => navigate('/login'), 3000);
+        }
+      })
+      .catch((err) => {
+        const code = err.response?.data?.code;
+        if (code === 'TOKEN_EXPIRED') {
+          setUiState('TOKEN_EXPIRED');
+        } else if (code === 'TOKEN_ALREADY_USED') {
+          setUiState('TOKEN_ALREADY_USED');
+        } else {
+          setUiState('INVALID_TOKEN');
+        }
+      });
   }, [token, navigate]);
-
-  useEffect(() => {
-    doVerify();
-  }, [doVerify]);
 
   const handleResend = async () => {
     if (!userEmail) {

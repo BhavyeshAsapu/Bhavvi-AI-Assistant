@@ -1,18 +1,25 @@
 import { useState } from 'react';
+
 import {
   AppBar, Toolbar, IconButton, Typography, Box,
   Tooltip, Switch, FormControlLabel, Avatar, Menu,
   MenuItem, Divider, Badge,
 } from '@mui/material';
-import {
-  Menu as MenuIcon,
-  DarkMode as DarkIcon,
-  LightMode as LightIcon,
-  Notifications as NotifyIcon,
-  Logout as LogoutIcon,
-  Person as PersonIcon,
-  AutoAwesome as AIIcon,
-} from '@mui/icons-material';
+import DarkMode from '@mui/icons-material/DarkMode';
+import LightMode from '@mui/icons-material/LightMode';
+const LightIcon = LightMode;
+import Notifications from '@mui/icons-material/Notifications';
+const NotifyIcon = Notifications;
+import Logout from '@mui/icons-material/Logout';
+const LogoutIcon = Logout;
+import Person from '@mui/icons-material/Person';
+const PersonIcon = Person;
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import MenuRounded from '@mui/icons-material/MenuRounded';
+const MenuIcon = MenuRounded;
+const DarkIcon = DarkMode;
+
 import { alpha } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 import useAuthStore from '../../store/authStore';

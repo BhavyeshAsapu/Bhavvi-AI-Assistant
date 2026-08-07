@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
+
 import {
   Box, Button, TextField, Typography, Paper,
   InputAdornment, IconButton, Alert, Link, CircularProgress, LinearProgress, Chip,
 } from '@mui/material';
-import {
-  Visibility, VisibilityOff, AutoAwesome as AIIcon,
-  Email, Lock, Person, AlternateEmail, CheckCircle as CheckIcon,
-  Cancel as CancelIcon,
-} from '@mui/icons-material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import Email from '@mui/icons-material/Email';
+import Lock from '@mui/icons-material/Lock';
+import Person from '@mui/icons-material/Person';
+import AlternateEmail from '@mui/icons-material/AlternateEmail';
+import CheckCircle from '@mui/icons-material/CheckCircle';
+const CheckIcon = CheckCircle;
+import Cancel from '@mui/icons-material/Cancel';
+const CancelIcon = Cancel;
+
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

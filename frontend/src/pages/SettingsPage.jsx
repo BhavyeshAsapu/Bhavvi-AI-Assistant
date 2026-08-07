@@ -1,10 +1,14 @@
+
 import {
   Box, Paper, Typography, Button, Divider, Switch,
   FormControlLabel, Alert, Grid, Avatar, Chip,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
-import { AutoAwesome as AIIcon, Logout as LogoutIcon } from '@mui/icons-material';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import Logout from '@mui/icons-material/Logout';
+const LogoutIcon = Logout;
 import useAuthStore from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';

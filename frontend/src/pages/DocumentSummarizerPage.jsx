@@ -1,14 +1,25 @@
 import { useState } from 'react';
+
 import {
   Box, Paper, Typography, Button, Chip, CircularProgress, Alert,
   LinearProgress, Divider, List, ListItem, ListItemIcon, ListItemText, Tab, Tabs,
 } from '@mui/material';
-import {
-  Description as DocIcon, AutoAwesome as AIIcon,
-  CloudUpload as UploadIcon, CheckCircle as CheckIcon,
-  Summarize as SummarizeIcon, Psychology as AnalyzeIcon,
-  QuestionAnswer as QAIcon, FactCheck as KeyPointsIcon,
-} from '@mui/icons-material';
+import CloudUpload from '@mui/icons-material/CloudUpload';
+const UploadIcon = CloudUpload;
+import CheckCircle from '@mui/icons-material/CheckCircle';
+const CheckIcon = CheckCircle;
+import Summarize from '@mui/icons-material/Summarize';
+const SummarizeIcon = Summarize;
+import Psychology from '@mui/icons-material/Psychology';
+const AnalyzeIcon = Psychology;
+import QuestionAnswer from '@mui/icons-material/QuestionAnswer';
+const QAIcon = QuestionAnswer;
+import FactCheck from '@mui/icons-material/FactCheck';
+const KeyPointsIcon = FactCheck;
+import Description from '@mui/icons-material/Description';
+const DocIcon = Description;
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { useDropzone } from 'react-dropzone';

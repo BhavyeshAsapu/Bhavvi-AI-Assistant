@@ -1,18 +1,24 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import {
   Box, Paper, Typography, IconButton, Tooltip, Chip,
   CircularProgress, Button, Skeleton,
 } from '@mui/material';
-import {
-  Send as SendIcon,
-  AttachFile as AttachIcon,
-  AutoAwesome as AIIcon,
-  StopCircle as StopIcon,
-  Refresh as RegenerateIcon,
-  ContentCopy as CopyIcon,
-  Check as CheckIcon,
-} from '@mui/icons-material';
+import Send from '@mui/icons-material/Send';
+const SendIcon = Send;
+import AttachFile from '@mui/icons-material/AttachFile';
+const AttachIcon = AttachFile;
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import StopCircle from '@mui/icons-material/StopCircle';
+const StopIcon = StopCircle;
+import Refresh from '@mui/icons-material/Refresh';
+const RegenerateIcon = Refresh;
+import ContentCopy from '@mui/icons-material/ContentCopy';
+const CopyIcon = ContentCopy;
+import Check from '@mui/icons-material/Check';
+const CheckIcon = Check;
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

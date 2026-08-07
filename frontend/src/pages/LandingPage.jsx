@@ -3,19 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Chip, Grid } from '@mui/material';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
-import {
-  AutoAwesome as AIIcon,
-  Psychology as BrainIcon,
-  Visibility as VisionIcon,
-  Search as RAGIcon,
-  Speed as SpeedIcon,
-  Source as SourceIcon,
-  Memory as MemoryIcon,
-  ArrowForward as ArrowIcon,
-  GitHub as GitHubIcon,
-  Code as CodeIcon,
-  KeyboardArrowDown as ScrollIcon,
-} from '@mui/icons-material';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import Search from '@mui/icons-material/Search';
+const RAGIcon = Search;
+import Speed from '@mui/icons-material/Speed';
+const SpeedIcon = Speed;
+import Source from '@mui/icons-material/Source';
+const SourceIcon = Source;
+import Memory from '@mui/icons-material/Memory';
+const MemoryIcon = Memory;
+import ArrowForward from '@mui/icons-material/ArrowForward';
+const ArrowIcon = ArrowForward;
+import GitHub from '@mui/icons-material/GitHub';
+const GitHubIcon = GitHub;
+import Code from '@mui/icons-material/Code';
+const CodeIcon = Code;
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+const ScrollIcon = KeyboardArrowDown;
+import Psychology from '@mui/icons-material/Psychology';
+const BrainIcon = Psychology;
+import Visibility from '@mui/icons-material/Visibility';
+const VisionIcon = Visibility;
 import useAuthStore from '../store/authStore';
 
 // ── Animated Aurora Background ────────────────────────────────────────────────

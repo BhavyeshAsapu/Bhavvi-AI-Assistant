@@ -1,14 +1,25 @@
 import { useState, useRef, useCallback } from 'react';
+
 import {
   Box, Paper, Typography, Button, Chip, CircularProgress, Alert,
   IconButton, Tooltip, TextField, Divider,
 } from '@mui/material';
-import {
-  CloudUpload as UploadIcon, AutoAwesome as AIIcon,
-  Image as ImageIcon, Delete as DeleteIcon,
-  Send as SendIcon, Lightbulb as TipIcon,
-  CameraAlt as CameraIcon, ZoomIn as ZoomIcon,
-} from '@mui/icons-material';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
+const AIIcon = AutoAwesome;
+import Image from '@mui/icons-material/Image';
+const ImageIcon = Image;
+import Delete from '@mui/icons-material/Delete';
+const DeleteIcon = Delete;
+import Send from '@mui/icons-material/Send';
+const SendIcon = Send;
+import Lightbulb from '@mui/icons-material/Lightbulb';
+const TipIcon = Lightbulb;
+import CameraAlt from '@mui/icons-material/CameraAlt';
+const CameraIcon = CameraAlt;
+import ZoomIn from '@mui/icons-material/ZoomIn';
+const ZoomIcon = ZoomIn;
+import CloudUpload from '@mui/icons-material/CloudUpload';
+const UploadIcon = CloudUpload;
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha } from '@mui/material/styles';
 import { useDropzone } from 'react-dropzone';
