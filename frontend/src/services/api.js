@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export const BASE_URL = (() => {
   const envUrl = import.meta.env.VITE_API_BASE_URL;
-  if (!envUrl) return 'http://localhost:8000/api/v1';
-  return envUrl.endsWith('/api/v1') ? envUrl : `${envUrl.replace(/\/$/, '')}/api/v1`;
+  let url = envUrl ? (envUrl.endsWith('/api/v1') ? envUrl : `${envUrl.replace(/\/$/, '')}/api/v1`) : 'http://localhost:8000/api/v1';
+  return url.endsWith('/') ? url : url + '/';
 })();
 
 const api = axios.create({
@@ -39,26 +39,26 @@ api.interceptors.response.use(
 
 // ── Auth ────────────────────────────────────────────────────────────────────
 export const authApi = {
-  register: (data) => api.post('/auth/register', data),
-  login: (data) => api.post('/auth/login', data),
-  me: () => api.get('/auth/me'),
-  verifyEmail: (token) => api.post('/auth/verify-email', { token }),
-  resendVerification: (email) => api.post('/auth/resend-verification', { email }),
+  register: (data) => api.post('auth/register', data),
+  login: (data) => api.post('auth/login', data),
+  me: () => api.get('auth/me'),
+  verifyEmail: (token) => api.post('auth/verify-email', { token }),
+  resendVerification: (email) => api.post('auth/resend-verification', { email }),
 };
 
 // ── Sessions ──────────────────────────────────────────────────────────────────
 export const sessionsApi = {
-  list: () => api.get('/sessions'),
-  create: (title = 'New Conversation') => api.post('/sessions', { title }),
-  get: (id) => api.get(`/sessions/${id}`),
-  update: (id, data) => api.patch(`/sessions/${id}`, data),
-  delete: (id) => api.delete(`/sessions/${id}`),
+  list: () => api.get('sessions'),
+  create: (title = 'New Conversation') => api.post('sessions', { title }),
+  get: (id) => api.get(`sessions/${id}`),
+  update: (id, data) => api.patch(`sessions/${id}`, data),
+  delete: (id) => api.delete(`sessions/${id}`),
 };
 
 // ── Chat ──────────────────────────────────────────────────────────────────────
 export const chatApi = {
-  send: (data) => api.post('/chat', data),
-  streamUrl: `${BASE_URL}/chat/stream`,
+  send: (data) => api.post('chat', data),
+  streamUrl: `${BASE_URL}chat/stream`,
 };
 
 // ── Upload ────────────────────────────────────────────────────────────────────
@@ -67,7 +67,7 @@ export const uploadApi = {
     const formData = new FormData();
     formData.append('file', file);
     if (sessionId) formData.append('session_id', sessionId);
-    return api.post('/upload', formData, {
+    return api.post('upload', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
       onUploadProgress: (evt) => {
         if (onProgress && evt.total) {
@@ -80,13 +80,13 @@ export const uploadApi = {
 
 // ── Documents ─────────────────────────────────────────────────────────────────
 export const documentsApi = {
-  list: () => api.get('/documents'),
-  get: (id) => api.get(`/documents/${id}`),
+  list: () => api.get('documents'),
+  get: (id) => api.get(`documents/${id}`),
 };
 
 // ── Health ────────────────────────────────────────────────────────────────────
 export const healthApi = {
-  check: () => api.get('/health').catch(() => ({ data: { status: 'unreachable' } })),
+  check: () => api.get('health').catch(() => ({ data: { status: 'unreachable' } })),
 };
 
 export default api;
