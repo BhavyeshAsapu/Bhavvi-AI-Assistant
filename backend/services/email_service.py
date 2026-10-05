@@ -133,8 +133,8 @@ async def send_verification_email(email: str, full_name: str, token: str) -> Non
         await aiosmtplib.send(
             msg,
             hostname="smtp.resend.com",
-            port=465,
-            use_tls=True,
+            port=587,
+            start_tls=True,
             username="resend",
             password=settings.smtp_app_password,
         )
