@@ -39,7 +39,7 @@ export function useChat() {
 
       // Use fetch-based SSE for POST with body (EventSource only supports GET)
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1'}/chat/stream`,
+        chatApi.streamUrl,
         {
           method: 'POST',
           headers: {
