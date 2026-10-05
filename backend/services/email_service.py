@@ -103,7 +103,7 @@ async def send_verification_email(email: str, full_name: str, token: str) -> Non
     This allows full development without real email credentials.
     """
     settings = get_settings()
-    verify_url = f"{settings.frontend_url}/verify-email?token={token}"
+    verify_url = f"{settings.frontend_url.rstrip('/')}/verify-email?token={token}"
 
     if not settings.smtp_email or not settings.smtp_app_password:
         # ── Development fallback ───────────────────────────────────────────
@@ -132,10 +132,10 @@ async def send_verification_email(email: str, full_name: str, token: str) -> Non
     try:
         await aiosmtplib.send(
             msg,
-            hostname="smtp.gmail.com",
-            port=587,
-            start_tls=True,
-            username=settings.smtp_email,
+            hostname="smtp.resend.com",
+            port=465,
+            use_tls=True,
+            username="resend",
             password=settings.smtp_app_password,
         )
         logger.info("verification_email_sent", email=email)
