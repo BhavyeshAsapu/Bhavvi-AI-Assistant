@@ -43,7 +43,7 @@ class Settings(BaseSettings):
 
     # ── API ───────────────────────────────────────────────────────────────────
     api_prefix: str = "/api/v1"
-    allowed_origins: str = "http://localhost:5173,http://localhost:3000"
+    allowed_origins: str = "http://localhost:5173,http://localhost:3000,https://ai.bhavvi.dev"
 
     @property
     def cors_origins(self) -> list[str]:
